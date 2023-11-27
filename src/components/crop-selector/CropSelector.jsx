@@ -1,5 +1,5 @@
 import React from 'react';
-import { crops } from '../const/crops';
+import { crops } from '../../const/crops';
 import { useDispatch } from 'react-redux';
 import { areaSlice } from '../../store/slices/area';
 import styles from './crop-selector.module.css';
