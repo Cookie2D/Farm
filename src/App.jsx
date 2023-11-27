@@ -2,6 +2,7 @@ import React from 'react';
 
 import Field from './components/Field/Field';
 import { useSelector } from 'react-redux';
+import Header from './components/header/Header';
 
 const App = () => {
   const { fields } = useSelector(state => state.area);
@@ -9,6 +10,7 @@ const App = () => {
 
   return (
     <div className="container">
+      <Header />
       {fields.map(field => (
         <Field key={field.id} field={field} />
       ))}
