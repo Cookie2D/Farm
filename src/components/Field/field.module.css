@@ -12,23 +12,3 @@
 .error {
   border: 2px solid red;
 }
-
-.modal {
-  position: absolute;
-  display: flex;
-  left: 5px;
-  bottom: 5px;
-}
-
-.button {
-  padding: 4px 8px;
-  margin: 2px;
-  border: 1px solid black;
-  border-radius: 2px;
-  text-transform: capitalize;
-}
-
-.button:hover {
-  background-color: black;
-  color: white;
-}
