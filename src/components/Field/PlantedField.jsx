@@ -2,11 +2,13 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import styles from './field.module.css';
 import { storageSlice } from '../../store/slices/storage';
+import { areaSlice } from '../../store/slices/area';
 
-export default function PlantedField({ plant, setPlant }) {
+export default function PlantedField({ id, plant }) {
   const [harvestTime, setHarvestTime] = React.useState(plant.time);
   const [intervalId, setIntervalId] = React.useState(null);
   const { append } = storageSlice.actions;
+  const { harvest } = areaSlice.actions;
   const dispatch = useDispatch();
 
   React.useEffect(() => {
@@ -20,18 +22,19 @@ export default function PlantedField({ plant, setPlant }) {
 
   React.useEffect(() => {
     if (harvestTime <= 0) clearInterval(intervalId);
-  }, [harvestTime]);
+  }, [harvestTime, intervalId]);
 
-  function harvest(e) {
+  function handleHarvest(e) {
     if (harvestTime <= 0) {
       dispatch(append(plant));
-      return setPlant(null);
+      return dispatch(harvest(id));
     }
+
     e.target.className = `${styles.error} ${styles.field}`;
   }
 
   return (
-    <div className={styles.field} onClick={harvest}>
+    <div className={styles.field} onClick={handleHarvest}>
       {plant.fieldName}
       {harvestTime > 0 ? <p>{harvestTime}s</p> : <p>Ready to harvest</p>}
     </div>
