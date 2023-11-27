@@ -1,0 +1,13 @@
+.field {
+  width: 200px;
+  height: 200px;
+
+  border: 1px solid black;
+
+  display: grid;
+  place-items: center;
+}
+
+.error {
+  border: 2px solid red;
+}
