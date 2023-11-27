@@ -11,9 +11,9 @@ export const areaSlice = createSlice({
   },
   reducers: {
     plant: (state, action) => {
-      const { id, crop } = action.payload;
+      const { id, plant } = action.payload;
       const index = state.fields.findIndex(f => f.id === id);
-      state.fields[index].plant = crop;
+      state.fields[index].plant = plant;
     },
     harvest: (state, action) => {
       const index = state.fields.findIndex(f => f.id === action.payload);

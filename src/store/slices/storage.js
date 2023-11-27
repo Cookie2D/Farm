@@ -4,6 +4,7 @@ export const storageSlice = createSlice({
   name: 'storage',
   initialState: {
     wheat: 0,
+    carrot: 0,
   },
   reducers: {
     append: (state, action) => {
