@@ -3,10 +3,10 @@ import React from 'react';
 import Field from './components/Field/Field';
 import { useSelector } from 'react-redux';
 import Header from './components/header/Header';
+import MenuIcons from './components/menu-icons/MenuIcons';
 
 const App = () => {
   const { fields } = useSelector(state => state.area);
-  const { wheat } = useSelector(state => state.storage);
 
   return (
     <div className="container">
@@ -15,7 +15,7 @@ const App = () => {
         <Field key={field.id} field={field} />
       ))}
 
-      <h1>{wheat}</h1>
+      <MenuIcons />
     </div>
   );
 };
