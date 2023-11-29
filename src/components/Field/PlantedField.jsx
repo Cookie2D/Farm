@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import styles from './field.module.css';
 import { storageSlice } from '../../store/slices/storage';
 import { areaSlice } from '../../store/slices/area';
+import styles from './field.module.css';
 
 export default function PlantedField({ id, plant }) {
   const [harvestTime, setHarvestTime] = React.useState(plant.time);
@@ -39,8 +39,22 @@ export default function PlantedField({ id, plant }) {
       style={{ zIndex: 1000 }}
       onClick={handleHarvest}
     >
-      {plant.fieldName}
-      {harvestTime > 0 ? <p>{harvestTime}s</p> : <p>Ready to harvest</p>}
+      <GardenCup plant={plant} harvestTime={harvestTime} />
+    </div>
+  );
+}
+
+function GardenCup({ plant, harvestTime }) {
+  const animation = harvestTime > 0 ? styles.growth : styles.pulse;
+  return (
+    <div
+      style={{ '--i': `${plant.time}s` }}
+      className={`${styles.plantation} ${animation}`}
+    >
+      <img src={plant.image} alt={plant.fieldName} />
+      <img src={plant.image} alt={plant.fieldName} />
+      <img src={plant.image} alt={plant.fieldName} />
+      <img src={plant.image} alt={plant.fieldName} />
     </div>
   );
 }
