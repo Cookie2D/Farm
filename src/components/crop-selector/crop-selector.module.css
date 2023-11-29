@@ -1,19 +1,42 @@
 .modal {
   position: absolute;
   display: flex;
-  left: 5px;
-  bottom: 5px;
+  overflow: hidden;
+  width: 200px;
+  height: 100%;
+  top: 0;
+}
+
+.menu {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .button {
-  padding: 4px 8px;
-  margin: 2px;
-  border: 1px solid black;
-  border-radius: 2px;
-  text-transform: capitalize;
+  position: absolute;
+  transform-origin: 100px;
+  left: 0;
+  top: 200px;
+  transition: transform calc(0.2s * (var(--i) + 1)) ease-in-out;
 }
 
-.button:hover {
-  background-color: black;
-  color: white;
+.active {
+  transform: rotate(calc(-360deg / 8 * var(--i) - 228deg));
+}
+
+.button img {
+  max-width: 50px;
+  max-height: 50px;
+  --rotation-angle: calc(360deg / 8 * var(--i) + 228deg);
+  transform: rotate(var(--rotation-angle));
+
+  transition: transform 0.1s linear;
+}
+
+.button:hover img {
+  transform: scale(1.2) rotate(var(--rotation-angle));
 }

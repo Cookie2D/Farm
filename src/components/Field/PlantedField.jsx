@@ -34,7 +34,11 @@ export default function PlantedField({ id, plant }) {
   }
 
   return (
-    <div className={styles.field} onClick={handleHarvest}>
+    <div
+      className={styles.field}
+      style={{ zIndex: 1000 }}
+      onClick={handleHarvest}
+    >
       {plant.fieldName}
       {harvestTime > 0 ? <p>{harvestTime}s</p> : <p>Ready to harvest</p>}
     </div>
