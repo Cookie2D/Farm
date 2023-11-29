@@ -5,7 +5,7 @@ export const storageSlice = createSlice({
   initialState: {
     wheat: 0,
     carrot: 0,
-    rice: 0,
+    corn: 0,
     money: 0,
   },
   reducers: {
