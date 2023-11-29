@@ -7,9 +7,11 @@ import styles from './field.module.css';
 export default function PlantedField({ id, plant }) {
   const [harvestTime, setHarvestTime] = React.useState(plant.time);
   const [intervalId, setIntervalId] = React.useState(null);
+  const [position, setPosition] = React.useState({});
+  const containerRef = React.useRef();
+  const dispatch = useDispatch();
   const { append } = storageSlice.actions;
   const { harvest } = areaSlice.actions;
-  const dispatch = useDispatch();
 
   React.useEffect(() => {
     const id = setInterval(() => {
@@ -26,11 +28,18 @@ export default function PlantedField({ id, plant }) {
 
   function handleHarvest(e) {
     if (harvestTime <= 0) {
-      dispatch(append(plant));
-      return dispatch(harvest(id));
+      containerRef.current.classList.add(styles.move);
+      const { x, y } = e.target;
+      setPosition({ x, y });
+
+      setTimeout(() => {
+        dispatch(append(plant));
+        return dispatch(harvest(id));
+      }, 950);
     }
 
-    e.target.className = `${styles.error} ${styles.field}`;
+    // TODO: Add shake on prevent harvesting
+    // e.target.className = `${styles.error} ${styles.field}`;
   }
 
   return (
@@ -38,23 +47,45 @@ export default function PlantedField({ id, plant }) {
       className={styles.field}
       style={{ zIndex: 1000 }}
       onClick={handleHarvest}
+      ref={containerRef}
     >
-      <GardenCup plant={plant} harvestTime={harvestTime} />
+      <GardenCup position={position} plant={plant} harvestTime={harvestTime} />
     </div>
   );
 }
 
-function GardenCup({ plant, harvestTime }) {
+function GardenCup({ plant, harvestTime, position }) {
   const animation = harvestTime > 0 ? styles.growth : styles.pulse;
+
   return (
     <div
-      style={{ '--i': `${plant.time}s` }}
+      style={{
+        '--i': `${plant.time}s`,
+        '--image-x': `-${position?.x}px`,
+        '--image-y': `${position?.y}px`,
+      }}
       className={`${styles.plantation} ${animation}`}
     >
-      <img src={plant.image} alt={plant.fieldName} />
-      <img src={plant.image} alt={plant.fieldName} />
-      <img src={plant.image} alt={plant.fieldName} />
-      <img src={plant.image} alt={plant.fieldName} />
+      <img
+        style={{ '--offset': `${0.25}s` }}
+        src={plant.image}
+        alt={plant.fieldName}
+      />
+      <img
+        style={{ '--offset': `${0.5}s` }}
+        src={plant.image}
+        alt={plant.fieldName}
+      />
+      <img
+        style={{ '--offset': `${0.75}s` }}
+        src={plant.image}
+        alt={plant.fieldName}
+      />
+      <img
+        style={{ '--offset': `${1}s` }}
+        src={plant.image}
+        alt={plant.fieldName}
+      />
     </div>
   );
 }
