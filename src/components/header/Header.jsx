@@ -5,7 +5,7 @@ import logo from '../../assets/logo192.png';
 
 export default function Header() {
   const storage = useSelector(state => state.storage);
-  console.log(storage, 'storage');
+
   return (
     <div className={styles.header}>
       <div>
