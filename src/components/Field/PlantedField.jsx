@@ -75,7 +75,7 @@ function GardenCup({ plant, harvestTime, position }) {
       }}
       className={`${styles.plantation} ${animation}`}
     >
-      // TODO: Disable dragable for this images
+      {/* TODO: Disable dragable for this images */}
       <img
         style={{ '--offset': `${0.25}s` }}
         src={plant.image}
