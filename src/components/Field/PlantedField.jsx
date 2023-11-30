@@ -28,6 +28,7 @@ export default function PlantedField({ id, plant }) {
 
   function handleHarvest(e) {
     if (harvestTime <= 0) {
+      // TODO: change animation to animate() function
       containerRef.current.classList.add(styles.move);
       const { x, y } = e.target;
       setPosition({ x, y });
@@ -38,8 +39,16 @@ export default function PlantedField({ id, plant }) {
       }, 950);
     }
 
-    // TODO: Add shake on prevent harvesting
-    // e.target.className = `${styles.error} ${styles.field}`;
+    //TODO: move animation out from this component, to animations folder / file
+    const shake = [
+      {transform: 'rotate(0deg)'},
+      {transform: 'rotate(-2deg)'},
+      {transform: 'rotate(2deg)'},
+      {transform: 'rotate(0deg)'},
+    ]
+
+    const shakeOptions = {duration: 200, iterations: 2}
+    containerRef.current.animate(shake, shakeOptions)
   }
 
   return (
@@ -66,6 +75,7 @@ function GardenCup({ plant, harvestTime, position }) {
       }}
       className={`${styles.plantation} ${animation}`}
     >
+      // TODO: Disable dragable for this images
       <img
         style={{ '--offset': `${0.25}s` }}
         src={plant.image}
