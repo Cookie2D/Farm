@@ -33,10 +33,9 @@ export default function PlantedField({ id, plant }) {
       const { x, y } = e.target;
       setPosition({ x, y });
 
-      setTimeout(() => {
-        dispatch(append(plant));
-        return dispatch(harvest(id));
-      }, 950);
+      // setTimeout(() => {
+        
+      // }, 950);
     }
 
     //TODO: move animation out from this component, to animations folder / file
@@ -51,12 +50,21 @@ export default function PlantedField({ id, plant }) {
     containerRef.current.animate(shake, shakeOptions)
   }
 
+  function putToStorage(e) {
+    console.log(e);
+    if(e.animationName === styles.move) {
+      dispatch(append(plant));
+      return dispatch(harvest(id));
+    }
+  }
+
   return (
     <div
       className={styles.field}
       style={{ zIndex: 1000 }}
       onClick={handleHarvest}
       ref={containerRef}
+      onAnimationEnd={putToStorage}
     >
       <GardenCup position={position} plant={plant} harvestTime={harvestTime} />
     </div>
@@ -77,22 +85,22 @@ function GardenCup({ plant, harvestTime, position }) {
     >
       {/* TODO: Disable dragable for this images */}
       <img
-        style={{ '--offset': `${0.25}s` }}
+        // style={{ '--offset': `${0.25}s` }}
         src={plant.image}
         alt={plant.fieldName}
       />
       <img
-        style={{ '--offset': `${0.5}s` }}
+        // style={{ '--offset': `${0.5}s` }}
         src={plant.image}
         alt={plant.fieldName}
       />
       <img
-        style={{ '--offset': `${0.75}s` }}
+        // style={{ '--offset': `${0.75}s` }}
         src={plant.image}
         alt={plant.fieldName}
       />
       <img
-        style={{ '--offset': `${1}s` }}
+        // style={{ '--offset': `${1}s` }}
         src={plant.image}
         alt={plant.fieldName}
       />

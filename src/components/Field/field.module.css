@@ -61,15 +61,15 @@
 }
 
 .move img {
-  animation: move 2s ease-in-out;
-  animation-duration: var(--offset);
+  animation: move 1s ease-in-out;
+  /* animation-duration: var(--offset); */
   animation-fill-mode: forwards;
 }
 @keyframes move {
   100% {
     transform: translate(
-      calc(var(--image-x) + 100vw + 100px),
-      calc(100vh - var(--image-y) + 100px)
+      calc(var(--image-x) + 100vw),
+      calc(100vh - var(--image-y))
     );
   }
 }
