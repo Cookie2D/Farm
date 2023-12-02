@@ -14,12 +14,12 @@ export default function Modal({ children, title, type }) {
   // TODO: add open and closing animation
   if (!open) return;
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.container}>
+    <div onClick={handleClose} className={styles.wrapper}>
+      <div onClick={e => e.stopPropagation()} className={styles.container}>
         <div className={styles.header}>{title}</div>
         <div>{children}</div>
         <button onClick={handleClose} className={styles.button}>
-          close
+          Close
         </button>
       </div>
     </div>

@@ -10,6 +10,9 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
+
+  backdrop-filter: blur(1px);
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .container {
@@ -24,7 +27,8 @@
   position: absolute;
   padding: 15px 80px;
   bottom: -30px;
-
+  font-weight: 700;
+  font-size: 18px;
   border-radius: 4px;
   background-color: #8b4513;
   color: #fff;
