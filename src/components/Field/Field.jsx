@@ -39,7 +39,6 @@ export default function Field({ field }) {
       },
     },
   };
-  console.log(variants, 'isInitialRender');
 
   return (
     <motion.div

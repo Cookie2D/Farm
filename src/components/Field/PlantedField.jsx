@@ -1,61 +1,29 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { storageSlice } from '../../store/slices/storage';
 import { areaSlice } from '../../store/slices/area';
 import styles from './field.module.css';
+import Timer from '../timer/Timer';
 
 export default function PlantedField({ id, plant }) {
-  const [harvestTime, setHarvestTime] = React.useState(plant.time);
-  const [intervalId, setIntervalId] = React.useState(null);
-  const [position, setPosition] = React.useState({});
-  const containerRef = React.useRef();
   const dispatch = useDispatch();
+  const canHarvest = useSelector(state => state.area.fields[id].grown);
+
   const { append } = storageSlice.actions;
-  const { harvest } = areaSlice.actions;
-
-  React.useEffect(() => {
-    const id = setInterval(() => {
-      setHarvestTime(prev => prev - 1);
-    }, 1000);
-
-    setIntervalId(id);
-    return () => clearInterval(id);
-  }, []);
-
-  React.useEffect(() => {
-    if (harvestTime <= 0) clearInterval(intervalId);
-  }, [harvestTime, intervalId]);
-
+  const { harvest, grewUp } = areaSlice.actions;
+  console.log(canHarvest, 'canHarvest');
   function handleHarvest(e) {
-    if (harvestTime <= 0) {
-      // TODO: change animation to animate() function
-      containerRef.current.classList.add(styles.move);
-      const { x, y } = e.target;
-      setPosition({ x, y });
-
-      // setTimeout(() => {
-        
-      // }, 950);
+    if (canHarvest) {
+      // TODO: create harvest animation
+      putToStorage();
     }
 
-    //TODO: move animation out from this component, to animations folder / file
-    const shake = [
-      {transform: 'rotate(0deg)'},
-      {transform: 'rotate(-2deg)'},
-      {transform: 'rotate(2deg)'},
-      {transform: 'rotate(0deg)'},
-    ]
-
-    const shakeOptions = {duration: 200, iterations: 2}
-    containerRef.current.animate(shake, shakeOptions)
+    //TODO: create error animation
   }
 
   function putToStorage(e) {
-    console.log(e);
-    if(e.animationName === styles.move) {
-      dispatch(append(plant));
-      return dispatch(harvest(id));
-    }
+    dispatch(append(plant));
+    return dispatch(harvest(id));
   }
 
   return (
@@ -63,47 +31,20 @@ export default function PlantedField({ id, plant }) {
       className={styles.field}
       style={{ zIndex: 1000 }}
       onClick={handleHarvest}
-      ref={containerRef}
-      onAnimationEnd={putToStorage}
     >
-      <GardenCup position={position} plant={plant} harvestTime={harvestTime} />
+      <Timer time={plant.time} action={grewUp(id)} />
+      <GardenCup plant={plant} />
     </div>
   );
 }
-
-function GardenCup({ plant, harvestTime, position }) {
-  const animation = harvestTime > 0 ? styles.growth : styles.pulse;
-
+function GardenCup({ plant }) {
   return (
-    <div
-      style={{
-        '--i': `${plant.time}s`,
-        '--image-x': `-${position?.x}px`,
-        '--image-y': `${position?.y}px`,
-      }}
-      className={`${styles.plantation} ${animation}`}
-    >
+    <div className={styles.plantation}>
       {/* TODO: Disable dragable for this images */}
-      <img
-        // style={{ '--offset': `${0.25}s` }}
-        src={plant.image}
-        alt={plant.fieldName}
-      />
-      <img
-        // style={{ '--offset': `${0.5}s` }}
-        src={plant.image}
-        alt={plant.fieldName}
-      />
-      <img
-        // style={{ '--offset': `${0.75}s` }}
-        src={plant.image}
-        alt={plant.fieldName}
-      />
-      <img
-        // style={{ '--offset': `${1}s` }}
-        src={plant.image}
-        alt={plant.fieldName}
-      />
+      <img src={plant.image} alt={plant.fieldName} />
+      <img src={plant.image} alt={plant.fieldName} />
+      <img src={plant.image} alt={plant.fieldName} />
+      <img src={plant.image} alt={plant.fieldName} />
     </div>
   );
 }
