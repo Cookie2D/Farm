@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { storageSlice } from '../../store/slices/storage';
 import { areaSlice } from '../../store/slices/area';
 import styles from './field.module.css';
