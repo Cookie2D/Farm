@@ -2,7 +2,7 @@ import React from 'react';
 import { normalizeTime } from '../../utils/normalizeTime';
 import { useDispatch } from 'react-redux';
 
-export default function Timer({ time, action }) {
+export default function Timer({ time, callback }) {
   const [renderTime, setRenderTime] = React.useState(time);
   const dispatch = useDispatch();
   const isMounted = React.useRef(true);
@@ -12,11 +12,7 @@ export default function Timer({ time, action }) {
       setRenderTime(prev => {
         if (prev <= 0) {
           clearInterval(id);
-
-          if (isMounted.current) {
-            dispatch(action);
-          }
-
+          callback();
           return 0;
         }
         return prev - 1;
@@ -27,7 +23,7 @@ export default function Timer({ time, action }) {
       clearInterval(id);
       isMounted.current = false;
     };
-  }, [dispatch, action]);
+  }, [dispatch, callback]);
 
   return <div>{normalizeTime(renderTime)}s</div>;
 }

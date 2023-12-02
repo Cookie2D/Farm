@@ -11,7 +11,7 @@ export default function PlantedField({ id, plant }) {
 
   const { append } = storageSlice.actions;
   const { harvest, grewUp } = areaSlice.actions;
-  console.log(canHarvest, 'canHarvest');
+
   function handleHarvest(e) {
     if (canHarvest) {
       // TODO: create harvest animation
@@ -26,13 +26,17 @@ export default function PlantedField({ id, plant }) {
     return dispatch(harvest(id));
   }
 
+  function growthEnd() {
+    dispatch(grewUp(id));
+  }
+
   return (
     <div
       className={styles.field}
       style={{ zIndex: 1000 }}
       onClick={handleHarvest}
     >
-      <Timer time={plant.time} action={grewUp(id)} />
+      <Timer time={plant.time} callback={growthEnd} />
       <GardenCup plant={plant} />
     </div>
   );
