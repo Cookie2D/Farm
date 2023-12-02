@@ -35,8 +35,8 @@ export default function Storage() {
                   </td>
                   <td>{crop.fieldName}</td>
                   <td>{cropCount}</td>
-                  <td>{crop.cost}</td>
-                  <td>{cropCount * crop.cost}</td>
+                  <td>{crop.cost}$</td>
+                  <td>{cropCount * crop.cost}$</td>
                 </tr>
               );
             })}

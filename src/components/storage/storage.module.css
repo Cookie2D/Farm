@@ -20,6 +20,17 @@
   color: #fff;
 }
 
+.tableContainer tr:nth-child(even) td {
+  border-right: 1px solid #ffe4b5;
+}
+.tableContainer tr:nth-child(odd) td {
+  border-right: 1px solid #f5deb3;
+}
+
+.tableContainer td:last-child {
+  border-right: none;
+}
+
 .tableContainer tr:nth-child(even) {
   background-color: #f5deb3;
 }
