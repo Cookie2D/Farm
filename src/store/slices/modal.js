@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const modalSlice = createSlice({
   name: 'modal',
   initialState: {
-    storage: true
+    storage: false
   },
   reducers: {
     toggle: (state, action) => {
