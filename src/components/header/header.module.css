@@ -2,16 +2,19 @@
   display: flex;
   justify-content: space-between;
 
-  padding: 20px;
+  padding: 20px 50px;
   font-size: 28px;
   font-weight: bold;
 
-  background-color: #572300;
+  background-color: #8b4513;
   align-items: center;
 }
 
 .money {
   color: #4bbe41;
+  background-color: #cd853f;
+  padding: 5px 15px;
+  border-radius: 4px;
 }
 
 .logo {
