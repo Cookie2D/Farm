@@ -24,7 +24,7 @@ export default function Storage() {
             {list.map(crop => {
               const cropCount = storage[crop.fieldName];
               return (
-                <tr>
+                <tr key={crop.fieldName}>
                   <td>
                     <img
                       className={styles.cropImage}

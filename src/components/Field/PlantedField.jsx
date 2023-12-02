@@ -13,7 +13,7 @@ export default function PlantedField({ id, plant }) {
   const { harvest } = areaSlice.actions;
   const [scope, animate] = useAnimate();
 
-  function handleHarvest(e) {
+  function handleHarvest() {
     if (canHarvest.current) {
       // TODO: create harvest animation
       putToStorage();
