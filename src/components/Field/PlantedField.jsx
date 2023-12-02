@@ -8,20 +8,18 @@ import { motion, useAnimate } from 'framer-motion';
 
 export default function PlantedField({ id, plant }) {
   const dispatch = useDispatch();
-  const canHarvest = useSelector(state => state.area.fields[id].grown);
-
+  const canHarvest = React.useRef(false);
   const { append } = storageSlice.actions;
-  const { harvest, grewUp } = areaSlice.actions;
+  const { harvest } = areaSlice.actions;
   const [scope, animate] = useAnimate();
 
   function handleHarvest(e) {
-    if (canHarvest) {
+    if (canHarvest.current) {
       // TODO: create harvest animation
       putToStorage();
     }
 
-    animate(scope.current, { rotate: [0, -1, 0, 1, 0] }, { duration: 0.2 });
-    //TODO: create error notification
+    handleEarlyHarvestAttempt();
   }
 
   function putToStorage(e) {
@@ -30,7 +28,12 @@ export default function PlantedField({ id, plant }) {
   }
 
   function growthEnd() {
-    dispatch(grewUp(id));
+    canHarvest.current = true;
+  }
+
+  function handleEarlyHarvestAttempt() {
+    animate(scope.current, { rotate: [0, -1, 0, 1, 0] }, { duration: 0.2 });
+    //TODO: create error notification
   }
 
   return (

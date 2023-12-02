@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const FIELD_SIZE = 15; // Change this value to adjust the size of the array
-const mockFields = Array.from({ length: FIELD_SIZE }, (_, id) => ({ id, plant: null, grown: false }));
+const mockFields = Array.from({ length: FIELD_SIZE }, (_, id) => ({ id, plant: null }));
 
 export const areaSlice = createSlice({
   name: 'area',
@@ -13,10 +13,6 @@ export const areaSlice = createSlice({
       const { id, plant } = action.payload;
       const index = state.fields.findIndex(f => f.id === id);
       state.fields[index].plant = plant;
-    },
-    grewUp: (state, action) => {
-      const index = state.fields.findIndex(f => f.id === action.payload);
-      state.fields[index].grown = true;
     },
     harvest: (state, action) => {
       const index = state.fields.findIndex(f => f.id === action.payload);

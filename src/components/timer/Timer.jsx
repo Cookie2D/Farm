@@ -4,8 +4,6 @@ import { useDispatch } from 'react-redux';
 
 export default function Timer({ time, callback }) {
   const [renderTime, setRenderTime] = React.useState(time);
-  const dispatch = useDispatch();
-  const isMounted = React.useRef(true);
 
   React.useEffect(() => {
     const id = setInterval(() => {
@@ -19,11 +17,8 @@ export default function Timer({ time, callback }) {
       });
     }, 1000);
 
-    return () => {
-      clearInterval(id);
-      isMounted.current = false;
-    };
-  }, [dispatch, callback]);
+    return () => clearInterval(id);
+  }, []);
 
   return <div>{normalizeTime(renderTime)}s</div>;
 }
