@@ -4,6 +4,7 @@ import { storageSlice } from '../../store/slices/storage';
 import { areaSlice } from '../../store/slices/area';
 import styles from './field.module.css';
 import Timer from '../timer/Timer';
+import { motion, useAnimate } from 'framer-motion';
 
 export default function PlantedField({ id, plant }) {
   const dispatch = useDispatch();
@@ -11,6 +12,7 @@ export default function PlantedField({ id, plant }) {
 
   const { append } = storageSlice.actions;
   const { harvest, grewUp } = areaSlice.actions;
+  const [scope, animate] = useAnimate();
 
   function handleHarvest(e) {
     if (canHarvest) {
@@ -18,7 +20,8 @@ export default function PlantedField({ id, plant }) {
       putToStorage();
     }
 
-    //TODO: create error animation
+    animate(scope.current, { rotate: [0, -1, 0, 1, 0] }, { duration: 0.2 });
+    //TODO: create error notification
   }
 
   function putToStorage(e) {
@@ -31,24 +34,24 @@ export default function PlantedField({ id, plant }) {
   }
 
   return (
-    <div
+    <motion.div
       className={styles.field}
       style={{ zIndex: 1000 }}
       onClick={handleHarvest}
+      ref={scope}
     >
       <Timer time={plant.time} callback={growthEnd} />
       <GardenCup plant={plant} />
-    </div>
+    </motion.div>
   );
 }
 function GardenCup({ plant }) {
   return (
     <div className={styles.plantation}>
-      {/* TODO: Disable dragable for this images */}
-      <img src={plant.image} alt={plant.fieldName} />
-      <img src={plant.image} alt={plant.fieldName} />
-      <img src={plant.image} alt={plant.fieldName} />
-      <img src={plant.image} alt={plant.fieldName} />
+      <img draggable={false} src={plant.image} alt={plant.fieldName} />
+      <img draggable={false} src={plant.image} alt={plant.fieldName} />
+      <img draggable={false} src={plant.image} alt={plant.fieldName} />
+      <img draggable={false} src={plant.image} alt={plant.fieldName} />
     </div>
   );
 }
