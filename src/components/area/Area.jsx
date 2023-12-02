@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import Field from '../Field/Field';
+import Field from '../field/Field';
 import styles from './area.module.css';
 
 export default function Area() {
