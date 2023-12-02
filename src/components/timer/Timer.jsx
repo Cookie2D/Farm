@@ -1,6 +1,5 @@
 import React from 'react';
 import { normalizeTime } from '../../utils/normalizeTime';
-import { useDispatch } from 'react-redux';
 
 export default function Timer({ time, callback }) {
   const [renderTime, setRenderTime] = React.useState(time);
@@ -18,7 +17,7 @@ export default function Timer({ time, callback }) {
     }, 1000);
 
     return () => clearInterval(id);
-  }, []);
+  }, [callback]);
 
   return <div>{normalizeTime(renderTime)}s</div>;
 }
