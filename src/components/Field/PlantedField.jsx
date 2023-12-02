@@ -4,7 +4,7 @@ import { storageSlice } from '../../store/slices/storage';
 import { areaSlice } from '../../store/slices/area';
 import styles from './field.module.css';
 import Timer from '../timer/Timer';
-import { motion, useAnimate } from 'framer-motion';
+import { easeInOut, easeOut, motion, useAnimate } from 'framer-motion';
 
 export default function PlantedField({ id, plant }) {
   const dispatch = useDispatch();
@@ -15,16 +15,11 @@ export default function PlantedField({ id, plant }) {
 
   function handleHarvest() {
     if (canHarvest.current) {
-      // TODO: create harvest animation
-      putToStorage();
+      dispatch(append(plant));
+      return dispatch(harvest(id));
     }
 
     handleEarlyHarvestAttempt();
-  }
-
-  function putToStorage(e) {
-    dispatch(append(plant));
-    return dispatch(harvest(id));
   }
 
   function growthEnd() {
@@ -48,13 +43,34 @@ export default function PlantedField({ id, plant }) {
     </motion.div>
   );
 }
+
+// TODO: separate to another file
 function GardenCup({ plant }) {
   return (
     <div className={styles.plantation}>
-      <img draggable={false} src={plant.image} alt={plant.fieldName} />
-      <img draggable={false} src={plant.image} alt={plant.fieldName} />
-      <img draggable={false} src={plant.image} alt={plant.fieldName} />
-      <img draggable={false} src={plant.image} alt={plant.fieldName} />
+      <CropImage plant={plant} />
+      <CropImage plant={plant} />
+      <CropImage plant={plant} />
+      <CropImage plant={plant} />
     </div>
+  );
+}
+
+// TODO: separate to another file
+function CropImage({ plant }) {
+  return (
+    <motion.img
+      initial={{ scale: 0.1 }}
+      animate={{ scale: 1 }}
+      exit={{
+        opacity: [1, 1, 0],
+        y: [0, -15, 20],
+        transition: { duration: 1, ease: easeInOut },
+      }}
+      draggable={false}
+      src={plant.image}
+      alt={plant.fieldName}
+      transition={{ duration: plant.time, ease: easeOut }}
+    />
   );
 }
