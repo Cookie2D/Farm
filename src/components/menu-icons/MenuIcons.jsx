@@ -4,8 +4,17 @@ import { ReactComponent as BarnIcon } from '../../assets/menu/barn.svg';
 import { ReactComponent as CartIcon } from '../../assets/menu/cart.svg';
 import { ReactComponent as TruckIcon } from '../../assets/menu/truck.svg';
 import { ReactComponent as CrossIcon } from '../../assets/menu/cross.svg';
+import { useDispatch } from 'react-redux';
+import { modalSlice } from '../../store/slices/modal';
 export default function MenuIcons() {
   const [isActive, setIsActive] = React.useState(false);
+  const dispatch = useDispatch();
+  const { toggle } = modalSlice.actions;
+
+  function handleOpenStorage() {
+    setIsActive(false);
+    dispatch(toggle({ type: 'storage' }));
+  }
 
   const handleIconClick = () => {
     setIsActive(prevIsActive => !prevIsActive);
@@ -19,7 +28,10 @@ export default function MenuIcons() {
         </div>
       </div>
 
-      <div className={`${styles.pie} ${styles.pie2}`} onClick={handleIconClick}>
+      <div
+        className={`${styles.pie} ${styles.pie2}`}
+        onClick={handleOpenStorage}
+      >
         <div className={`${styles.pieColor} ${styles.pieColor2}`}>
           <BarnIcon className={styles.discount} width="100" height="100" />
         </div>

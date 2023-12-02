@@ -1,0 +1,36 @@
+.wrapper {
+  /* margin: 50px; */
+}
+
+.tableContainer {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 40px;
+}
+
+.tableHead {
+  margin-top: 20px;
+}
+
+.tableContainer th,
+.tableContainer td {
+  padding: 20px;
+  text-align: center;
+}
+
+.tableContainer th {
+  background-color: #cd853f;
+  color: #fff;
+}
+
+.tableContainer tr:nth-child(even) {
+  background-color: #f5deb3;
+}
+
+.tableContainer tr:nth-child(odd) {
+  background-color: #ffe4b5;
+}
+
+.cropImage {
+  width: 50px;
+}
