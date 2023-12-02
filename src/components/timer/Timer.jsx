@@ -1,5 +1,6 @@
 import React from 'react';
 import { normalizeTime } from '../../utils/normalizeTime';
+import styles from './timer.module.css';
 
 export default function Timer({ time, callback }) {
   const [renderTime, setRenderTime] = React.useState(time);
@@ -9,7 +10,6 @@ export default function Timer({ time, callback }) {
       setRenderTime(prev => {
         if (prev <= 0) {
           clearInterval(id);
-          callback();
           return 0;
         }
         return prev - 1;
@@ -19,5 +19,6 @@ export default function Timer({ time, callback }) {
     return () => clearInterval(id);
   }, [callback]);
 
-  return <div>{normalizeTime(renderTime)}s</div>;
+  if (!renderTime) return callback();
+  return <div className={styles.timer}>{normalizeTime(renderTime)}s</div>;
 }
