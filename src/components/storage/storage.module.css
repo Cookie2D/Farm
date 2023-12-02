@@ -12,6 +12,7 @@
 .tableContainer td {
   padding: 20px;
   text-align: center;
+  text-transform: capitalize;
 }
 
 .tableContainer th {
@@ -25,6 +26,10 @@
 
 .tableContainer tr:nth-child(odd) {
   background-color: #ffe4b5;
+}
+
+.tableContainer tr:hover {
+  background-color: #d2b48c;
 }
 
 .cropImage {
