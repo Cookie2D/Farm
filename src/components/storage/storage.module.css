@@ -27,20 +27,19 @@
   border-right: 1px solid #f5deb3;
 }
 
-.tableContainer td:last-child {
-  border-right: none;
-}
-
 .tableContainer tr:nth-child(even) {
   background-color: #f5deb3;
+  transition: background-color 0.2s ease-in;
 }
 
 .tableContainer tr:nth-child(odd) {
   background-color: #ffe4b5;
+  transition: background-color 0.2s ease-in;
 }
 
 .tableContainer tr:hover {
   background-color: #d2b48c;
+  border: none;
 }
 
 .cropImage {
