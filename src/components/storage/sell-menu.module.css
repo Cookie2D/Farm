@@ -39,7 +39,13 @@
 .menu input:focus {
   outline: none;
   border-color: #8b4513;
-  /* box-shadow: 0 0 5px rgba(139, 69, 19, 0.5); */
+}
+
+.error {
+  text-decoration: underline;
+  color: #d82626;
+  font-size: 15px;
+  margin: 5px;
 }
 
 .button {

@@ -35,7 +35,7 @@ export default function PlantedField({ id, plant }) {
   return (
     <motion.div
       className={styles.field}
-      style={{ zIndex: 1000 }}
+      style={{ zIndex: 50 }}
       onClick={handleHarvest}
       ref={scope}
     >

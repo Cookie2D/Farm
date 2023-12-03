@@ -27,7 +27,7 @@ export const storageSlice = createSlice({
     },
     sellCrop: (state, action) => {
       const {amount, fieldName, count} = action.payload;
-      if(state.barn[fieldName] < count) throw new Error('bla')
+      if(state.barn[fieldName] < count) throw new Error(`Missing ${fieldName.toLowerCase()} in your storage.`)
       
       state.barn[fieldName] -= count;
       state.money += amount;
