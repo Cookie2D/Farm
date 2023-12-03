@@ -1,12 +1,19 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { list } from '../../const/crops/crops';
 import styles from './storage.module.css';
+import { storageSlice } from '../../store/slices/storage';
+import SellMenu from './SellMenu';
 
 export default function Storage() {
   const storage = useSelector(state => state.storage.barn);
+  const dispatch = useDispatch();
+  const { setMenuField } = storageSlice.actions;
 
-  console.log(storage, 'storage');
+  function openMenu(crop) {
+    dispatch(setMenuField(crop));
+  }
+
   return (
     <div className={styles.wrapper}>
       <div>
@@ -18,6 +25,7 @@ export default function Storage() {
               <th>Count</th>
               <th>Cost</th>
               <th>Total</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -37,12 +45,23 @@ export default function Storage() {
                   <td>{cropCount}</td>
                   <td>{crop.cost}$</td>
                   <td>{cropCount * crop.cost}$</td>
+                  <td>
+                    <button
+                      onClick={() => openMenu(crop)}
+                      className={styles.button}
+                    >
+                      Sell
+                    </button>
+                  </td>
                 </tr>
               );
             })}
           </tbody>
         </table>
       </div>
+
+      {/* TODO: Add opening and closing animation here */}
+      <SellMenu />
     </div>
   );
 }
