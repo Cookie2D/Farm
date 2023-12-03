@@ -8,6 +8,8 @@ export const WHEAT = {
   time: 2,
   cost: 4,
   image: wheat,
+  seedCost: 2,
+  seedImage: wheat, // TODO: change seed images
 }
 
 export const CARROT = {
@@ -16,6 +18,8 @@ export const CARROT = {
   time: 4,
   cost: 8,
   image: carrot,
+  seedCost: 4,
+  seedImage: carrot, // TODO: change seed images
 }
 
 export const CORN = {
@@ -24,6 +28,8 @@ export const CORN = {
   time: 8,
   cost: 20,
   image: corn,
+  seedCost: 20,
+  seedImage: corn, // TODO: change seed images
 }
 
 export const list = [WHEAT, CARROT, CORN]

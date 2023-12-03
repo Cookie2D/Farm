@@ -3,6 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { storageSlice } from './slices/storage';
 import { areaSlice } from './slices/area';
 import { modalSlice } from './slices/modal';
+import { shopSlice } from './slices/shop';
 
 // const preloadedState = localStorage.getItem('preloadedState')
 //   ? JSON.parse(localStorage.getItem('preloadedState'))
@@ -13,6 +14,7 @@ const store = configureStore({
     storage: storageSlice.reducer,
     area: areaSlice.reducer,
     modal: modalSlice.reducer,
+    shop: shopSlice.reducer
   },
   // preloadedState
 });

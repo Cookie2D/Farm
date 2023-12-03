@@ -1,17 +1,17 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import styles from './shop.module.css';
 import { list } from '../../const/crops/crops';
-import styles from './storage.module.css';
-import { storageSlice } from '../../store/slices/storage';
-import SellMenu from './SellMenu';
+import { useDispatch, useSelector } from 'react-redux';
+import BuyMenu from './BuyMenu';
+import { shopSlice } from '../../store/slices/shop';
 
-export default function Storage() {
-  const storage = useSelector(state => state.storage.barn);
+export default function Shop() {
+  const seeds = useSelector(state => state.shop.seeds);
   const dispatch = useDispatch();
-  const { setMenuField } = storageSlice.actions;
+  const { setMenuField } = shopSlice.actions;
 
-  function openMenu(crop) {
-    dispatch(setMenuField(crop));
+  function openMenu(seed) {
+    dispatch(setMenuField(seed));
   }
 
   return (
@@ -21,16 +21,15 @@ export default function Storage() {
           <thead className={styles.tableHead}>
             <tr>
               <th></th>
-              <th>Crop</th>
-              <th>Count</th>
+              <th>Seed</th>
+              <th>Available</th>
               <th>Cost</th>
-              <th>Total</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
             {list.map(crop => {
-              const cropCount = storage[crop.fieldName];
+              const seed = seeds[crop.fieldName];
               return (
                 <tr key={crop.fieldName}>
                   <td>
@@ -42,15 +41,14 @@ export default function Storage() {
                     />
                   </td>
                   <td>{crop.fieldName}</td>
-                  <td>{cropCount}</td>
-                  <td>{crop.cost}$</td>
-                  <td>{cropCount * crop.cost}$</td>
+                  <td>{seed.count}</td>
+                  <td>{seed.cost}$</td>
                   <td>
                     <button
-                      onClick={() => openMenu(crop)}
+                      onClick={() => openMenu(seed)}
                       className={styles.button}
                     >
-                      Sell
+                      Buy
                     </button>
                   </td>
                 </tr>
@@ -60,7 +58,7 @@ export default function Storage() {
         </table>
       </div>
 
-      <SellMenu />
+      <BuyMenu />
     </div>
   );
 }

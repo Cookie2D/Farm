@@ -11,7 +11,7 @@ export default function CropSelector({ id }) {
   const dispatch = useDispatch();
   const { plant } = areaSlice.actions;
   const field = useSelector(state => state.area.fields[id]);
-
+  // TODO: connect to seeds
   React.useEffect(() => {
     const timerId = setTimeout(() => {
       function handleClickOutside(event) {

@@ -1,17 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { list } from '../../const/crops/crops';
+
+const barn = list.reduce((accumulator, el) => {
+  accumulator[el.fieldName] = 0
+  return accumulator;
+}, {});
 
 export const storageSlice = createSlice({
   name: 'storage',
   initialState: {
-    barn: {
-      wheat: 0,
-      carrot: 20,
-      corn: 0,
-    },
+    barn: {...barn},
+    seeds: {...barn}, // TODO: move into the barn
     menu: {
       selectedField: null
     },
-    money: 0,
+    money: 20,
   },
   reducers: {
     append: (state, action) => {
@@ -31,6 +34,13 @@ export const storageSlice = createSlice({
       
       state.barn[fieldName] -= count;
       state.money += amount;
+    },
+    buySeed: (state, action) => {
+      const {amount, name, count} = action.payload;
+      if(state.money < amount) throw new Error(`Not enouth money`)
+      
+      state.money -= amount;
+      state.seeds[name] += count;
     },
   },
 });
