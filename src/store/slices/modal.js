@@ -4,7 +4,7 @@ export const modalSlice = createSlice({
   name: 'modal',
   initialState: {
     storage: false,
-    shop: true,
+    shop: false,
   },
   reducers: {
     toggle: (state, action) => {

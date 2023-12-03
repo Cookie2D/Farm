@@ -11,9 +11,9 @@ export default function MenuIcons() {
   const dispatch = useDispatch();
   const { toggle } = modalSlice.actions;
 
-  function handleOpenStorage() {
+  function handleOpen(type) {
     setIsActive(false);
-    dispatch(toggle({ type: 'storage' }));
+    dispatch(toggle({ type }));
   }
 
   const handleIconClick = () => {
@@ -22,7 +22,10 @@ export default function MenuIcons() {
 
   return (
     <div className={`${styles.menuContainer} ${isActive && styles.active}`}>
-      <div className={`${styles.pie} ${styles.pie1}`} onClick={handleIconClick}>
+      <div
+        className={`${styles.pie} ${styles.pie1}`}
+        onClick={() => handleOpen('shop')}
+      >
         <div className={`${styles.pieColor} ${styles.pieColor1}`}>
           <CartIcon className={styles.card} width="100" height="100" />
         </div>
@@ -30,7 +33,7 @@ export default function MenuIcons() {
 
       <div
         className={`${styles.pie} ${styles.pie2}`}
-        onClick={handleOpenStorage}
+        onClick={() => handleOpen('storage')}
       >
         <div className={`${styles.pieColor} ${styles.pieColor2}`}>
           <BarnIcon className={styles.discount} width="100" height="100" />
