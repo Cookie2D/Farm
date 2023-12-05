@@ -11,7 +11,7 @@ export const modalSlice = createSlice({
       const { type } = action.payload;
       state[type] = !state[type];
     }
-  },
+  }, 
 });
 
 export const { actions } = modalSlice;
