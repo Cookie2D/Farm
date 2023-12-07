@@ -10,7 +10,7 @@ export const storageSlice = createSlice({
   name: 'storage',
   initialState: {
     barn: {...barn},
-    seeds: {...barn}, // TODO: move into the barn
+    seeds: {...barn},
     menu: {
       selectedField: null
     },

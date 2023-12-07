@@ -44,7 +44,7 @@ export default function SellMenu() {
     } catch (error) {
       return setError(error.message);
     }
-    // TODO: think about best way
+
     dispatch(setMenuField(null));
     setSellCount(0);
   }
