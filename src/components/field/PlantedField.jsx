@@ -6,12 +6,14 @@ import styles from './field.module.css';
 import Timer from '../timer/Timer';
 import GardenCup from '../garden-cup/GardenCup';
 import { motion, useAnimate } from 'framer-motion';
+import { notificationSlice } from '../../store/slices/notification';
 
 export default function PlantedField({ id, plant }) {
   const dispatch = useDispatch();
   const canHarvest = React.useRef(false);
   const { append } = storageSlice.actions;
   const { harvest } = areaSlice.actions;
+  const { show } = notificationSlice.actions;
   const [scope, animate] = useAnimate();
 
   function handleHarvest() {
@@ -29,7 +31,7 @@ export default function PlantedField({ id, plant }) {
 
   function handleEarlyHarvestAttempt() {
     animate(scope.current, { rotate: [0, -1, 0, 1, 0] }, { duration: 0.2 });
-    //TODO: create error notification
+    dispatch(show({ type: 'error', text: 'To early to harvest' }));
   }
 
   return (

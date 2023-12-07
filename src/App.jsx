@@ -5,6 +5,7 @@ import Area from './components/area/Area';
 import Modal from './components/modal/Modal';
 import Storage from './components/storage/Storage';
 import Shop from './components/shop/Shop';
+import Notification from './components/shared/notification/Notification';
 
 const App = () => {
   return (
@@ -20,6 +21,8 @@ const App = () => {
       <Modal title="Shop" type="shop">
         <Shop />
       </Modal>
+
+      <Notification />
     </div>
   );
 };
