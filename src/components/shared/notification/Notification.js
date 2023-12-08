@@ -3,10 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from './notification.module.css';
 import { motion, AnimatePresence } from 'framer-motion';
 import { notificationSlice } from '../../../store/slices/notification';
-
+import { notifications  as notificationsConst } from '../../../const/notifications'
 // TODO: add types consts
-
-// TODO: add messages texts
 
 export default function Notification() {
   const notifications = useSelector(state => state.notification);
@@ -34,6 +32,10 @@ export default function Notification() {
           animate={{ y: 60 * (notifications.length - i - 1) }}
           key={notification.id}
           className={`${styles.container} ${styles[notification.type]}`}
+          styles={{
+            color: notificationsConst.colors[notification.type].primary,
+            borderColor: notificationsConst.colors[notification.type].secondary
+          }}
         >
           {notification.text}
         </motion.div>

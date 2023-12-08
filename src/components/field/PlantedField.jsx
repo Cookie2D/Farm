@@ -7,6 +7,8 @@ import Timer from '../timer/Timer';
 import GardenCup from '../garden-cup/GardenCup';
 import { motion, useAnimate } from 'framer-motion';
 import { notificationSlice } from '../../store/slices/notification';
+import { notifications } from '../../const/notifications';
+import { messages } from '../../const/messages';
 
 export default function PlantedField({ id, plant }) {
   const dispatch = useDispatch();
@@ -31,7 +33,12 @@ export default function PlantedField({ id, plant }) {
 
   function handleEarlyHarvestAttempt() {
     animate(scope.current, { rotate: [0, -1, 0, 1, 0] }, { duration: 0.2 });
-    dispatch(show({ type: 'error', text: 'To early to harvest' }));
+    dispatch(
+      show({
+        type: notifications.type.error,
+        text: messages.errors.CANT_HARVEST,
+      })
+    );
   }
 
   return (
