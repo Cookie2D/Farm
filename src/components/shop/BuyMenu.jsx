@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { motion, AnimatePresence, useAnimate } from 'framer-motion';
 import { shopSlice } from '../../store/slices/shop';
 import { storageSlice } from '../../store/slices/storage';
+import bagIcon from '../../assets/shop/bag.svg';
 
 export default function BuyMenu() {
   const [buyCount, setBuyCount] = React.useState(1);
@@ -86,9 +87,15 @@ export default function BuyMenu() {
             damping: 15,
           }}
         >
-          <div className={styles.image}>
+          <div className={styles.imageContainer}>
             <img
-              className={styles.cropImage}
+              draggable={false}
+              src={bagIcon}
+              alt={selectedField.name}
+              className={styles.bag}
+            />
+            <img
+              className={styles.image}
               draggable={false}
               src={selectedField.image}
               alt={selectedField.name}

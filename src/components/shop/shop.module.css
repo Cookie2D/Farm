@@ -42,8 +42,17 @@
   border: none;
 }
 
+.bag {
+  width: 75px;
+  height: 75px;
+  position: relative;
+}
+
 .cropImage {
-  width: 50px;
+  position: absolute;
+  top: calc(50% - 10px);
+  left: calc(50% - 20px);
+  width: 40px;
 }
 
 .button {

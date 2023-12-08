@@ -9,7 +9,7 @@ export const WHEAT = {
   cost: 4,
   image: wheat,
   seedCost: 2,
-  seedImage: wheat, // TODO: change seed images
+  seedImage: wheat,
 }
 
 export const CARROT = {
@@ -19,7 +19,7 @@ export const CARROT = {
   cost: 8,
   image: carrot,
   seedCost: 4,
-  seedImage: carrot, // TODO: change seed images
+  seedImage: carrot,
 }
 
 export const CORN = {
@@ -29,7 +29,7 @@ export const CORN = {
   cost: 20,
   image: corn,
   seedCost: 20,
-  seedImage: corn, // TODO: change seed images
+  seedImage: corn,
 }
 
 export const list = [WHEAT, CARROT, CORN]

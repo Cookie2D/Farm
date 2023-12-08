@@ -4,6 +4,7 @@ import { list } from '../../const/crops/crops';
 import { useDispatch, useSelector } from 'react-redux';
 import BuyMenu from './BuyMenu';
 import { shopSlice } from '../../store/slices/shop';
+import bagIcon from '../../assets/shop/bag.svg';
 
 export default function Shop() {
   const seeds = useSelector(state => state.shop.seeds);
@@ -33,12 +34,20 @@ export default function Shop() {
               return (
                 <tr key={crop.fieldName}>
                   <td>
-                    <img
-                      className={styles.cropImage}
-                      draggable={false}
-                      src={crop.image}
-                      alt={crop.fieldName}
-                    />
+                    <div className={styles.bag}>
+                      <img
+                        className={styles.bag}
+                        draggable={false}
+                        src={bagIcon}
+                        alt={crop.fieldName}
+                      />
+                      <img
+                        className={styles.cropImage}
+                        draggable={false}
+                        src={crop.image}
+                        alt={crop.fieldName}
+                      />
+                    </div>
                   </td>
                   <td>{crop.fieldName}</td>
                   <td>{seed.count}</td>
