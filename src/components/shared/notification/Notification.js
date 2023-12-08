@@ -4,7 +4,6 @@ import styles from './notification.module.css';
 import { motion, AnimatePresence } from 'framer-motion';
 import { notificationSlice } from '../../../store/slices/notification';
 import { notifications  as notificationsConst } from '../../../const/notifications'
-// TODO: add types consts
 
 export default function Notification() {
   const notifications = useSelector(state => state.notification);
