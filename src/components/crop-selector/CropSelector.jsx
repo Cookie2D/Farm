@@ -3,6 +3,9 @@ import { crops } from '../../const/crops';
 import { useDispatch, useSelector } from 'react-redux';
 import { areaSlice } from '../../store/slices/area';
 import styles from './crop-selector.module.css';
+import { storageSlice } from '../../store/slices/storage';
+import { notificationSlice } from '../../store/slices/notification';
+import { notifications } from '../../const/notifications';
 
 export default function CropSelector({ id }) {
   const modalRef = React.useRef();
@@ -10,6 +13,9 @@ export default function CropSelector({ id }) {
 
   const dispatch = useDispatch();
   const { plant } = areaSlice.actions;
+  const { plantCrop } = storageSlice.actions;
+  const { show } = notificationSlice.actions;
+
   const field = useSelector(state => state.area.fields[id]);
   // TODO: connect to seeds
   React.useEffect(() => {
@@ -36,7 +42,17 @@ export default function CropSelector({ id }) {
 
   function handlePlant(crop) {
     setShowTooltip(false);
-    dispatch(plant({ id, plant: crop }));
+    try {
+      dispatch(plantCrop(crop));
+      dispatch(plant({ id, plant: crop }));
+    } catch (error) {
+      dispatch(
+        show({
+          type: notifications.type.error,
+          text: error.message,
+        })
+      );
+    }
   }
 
   function handleOpen() {

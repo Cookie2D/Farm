@@ -21,9 +21,10 @@ export const storageSlice = createSlice({
       const { fieldName, count } = action.payload;
       state.barn[fieldName] = state.barn[fieldName] + count;
     },
-    remove: (state, action) => {
+    plantCrop: (state, action) => {
       const { fieldName, count } = action.payload;
-      state.barn[fieldName] = state.barn[fieldName] - count;
+      if(state.seeds[fieldName] < count) throw new Error(`Missing ${fieldName.toLowerCase()} in your storage.`)
+      state.seeds[fieldName] = state.seeds[fieldName] - count;
     },
     setMenuField: (state, action) => {
       state.menu.selectedField = action.payload;
