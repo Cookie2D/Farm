@@ -20,6 +20,7 @@ const store = configureStore({
   },
   // preloadedState
 });
+// TODO: REFACTORE SELECTORS TO ADD MORE READABILITY TO YOUR FUCKING CODE
 
 // store.subscribe(() =>
 //   localStorage.setItem('preloadedState', JSON.stringify(store.getState()))

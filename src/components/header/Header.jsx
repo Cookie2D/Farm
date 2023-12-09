@@ -12,6 +12,7 @@ export default function Header() {
         <img src={logo} alt="logo" className={styles.logo} />
       </div>
       <p className={styles.money}>${storage.money}</p>
+      {/* TODO: add seed displaying to improve user experiece */}
     </div>
   );
 }
